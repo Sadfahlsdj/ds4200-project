@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI by Transportation Method</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .chart-container {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .chart {
+            background-color: #f9f9f9;
+        }
+        .box {
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+        .median {
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+        .whisker {
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+        .outlier {
+            fill: #ccc;
+            stroke: #333;
+            stroke-width: 1px;
+        }
+        .axis text {
+            font-size: 12px;
+        }
+        .axis-label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .title {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        #error {
+            color: red;
+            margin: 20px 0;
+        }
+        .bmi-reference {
+            pointer-events: none;
+        }
+        .bmi-label {
+            font-size: 11px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<h1>BMI Distribution by Transportation Method</h1>
+<div id="error"></div>
+<div id="chart"></div>
+
+<script>
+    function logError(message) {
+        console.error(message);
+        d3.select("#error").text(message);
+    }
+
+
+    // Function to calculate BMI
+    function calculateBMI(weight, height) {
+        return weight / (height * height);
+    }
+
+    try {
+        d3.csv("ObesityDataSet_raw_and_data_sinthetic.csv").then(function(data) {
+            if (!data || data.length === 0) {
+                logError("CSV loaded but no data found. Using sample data.");
+            } else {
+                console.log("CSV loaded successfully:", data);
+                // Calculate BMI for each record
+                data.forEach(d => {
+                    d.BMI = calculateBMI(+d.Weight, +d.Height);
+                });
+                createBoxPlots(data);
+            }
+        }).catch(function(error) {
+            logError("Error loading CSV: " + error + ". Using sample data.");
+        });
+    } catch (e) {
+        logError("Exception: " + e + ". Using sample data.");
+    }
+
+    function createBoxPlots(data) {
+        // group by transport method
+        const transportGroups = Array.from(d3.group(data, d => d.MTRANS),
+            ([key, value]) => ({ key, values: value }));
+
+        const container = d3.select("#chart");
+
+        const chartContainer = container.append("div")
+            .classed("chart-container", true);
+
+        chartContainer.append("div")
+            .classed("title", true)
+            .text("BMI Distribution by Transportation Method");
+
+        const margin = {top: 40, right: 120, bottom: 120, left: 60};
+        const width = 900 - margin.left - margin.right;
+        const height = 500 - margin.top - margin.bottom;
+
+        const svg = chartContainer.append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleBand()
+            .domain(transportGroups.map(d => d.key))
+            .range([0, width])
+            .padding(0.2);
+
+        const y = d3.scaleLinear()
+            .domain([15, 40])
+            .range([height, 0]);
+
+        // boxplot for each group
+        transportGroups.forEach(group => {
+            const bmiValues = group.values.map(d => d.BMI).sort(d3.ascending);
+            const q1 = d3.quantile(bmiValues, 0.25);
+            const median = d3.quantile(bmiValues, 0.5);
+            const q3 = d3.quantile(bmiValues, 0.75);
+            const iqr = q3 - q1;
+            const min = Math.max(q1 - 1.5 * iqr, d3.min(bmiValues));
+            const max = Math.min(q3 + 1.5 * iqr, d3.max(bmiValues));
+
+            group.stats = {
+                q1, median, q3, iqr, min, max,
+                outliers: bmiValues.filter(v => v < min || v > max)
+            };
+        });
+
+        const boxWidth = x.bandwidth() * 0.6;
+
+        svg.selectAll(".whisker")
+            .data(transportGroups)
+            .enter()
+            .append("line")
+            .attr("class", "whisker")
+            .attr("x1", d => x(d.key) + x.bandwidth()/2)
+            .attr("x2", d => x(d.key) + x.bandwidth()/2)
+            .attr("y1", d => y(d.stats.min))
+            .attr("y2", d => y(d.stats.max))
+            .attr("stroke", "#333");
+
+        svg.selectAll(".box")
+            .data(transportGroups)
+            .enter()
+            .append("rect")
+            .attr("class", "box")
+            .attr("x", d => x(d.key) + x.bandwidth()/2 - boxWidth/2)
+            .attr("y", d => y(d.stats.q3))
+            .attr("width", boxWidth)
+            .attr("height", d => y(d.stats.q1) - y(d.stats.q3))
+            .attr("fill", "#1f77b4");
+
+        svg.selectAll(".median")
+            .data(transportGroups)
+            .enter()
+            .append("line")
+            .attr("class", "median")
+            .attr("x1", d => x(d.key) + x.bandwidth()/2 - boxWidth/2)
+            .attr("x2", d => x(d.key) + x.bandwidth()/2 + boxWidth/2)
+            .attr("y1", d => y(d.stats.median))
+            .attr("y2", d => y(d.stats.median));
+
+        svg.selectAll(".outlier")
+            .data(transportGroups.flatMap(d =>
+                d.stats.outliers.map(v => ({ method: d.key, value: v }))
+            ))
+            .enter()
+            .append("circle")
+            .attr("class", "outlier")
+            .attr("cx", d => x(d.method) + x.bandwidth()/2)
+            .attr("cy", d => y(d.value))
+            .attr("r", 3);
+
+        // reference lines to show overweight, normal, underweight
+        const bmiCategories = [
+            { name: "Underweight (<18.5)", threshold: 18.5, color: "#2ca02c" },
+            { name: "Normal (18.5-25)", threshold: 25, color: "#ff7f0e" },
+            { name: "Overweight (25-30)", threshold: 30, color: "#d62728" }
+        ];
+
+        const referenceGroup = svg.append("g")
+            .attr("class", "reference-lines");
+
+        bmiCategories.forEach(cat => {
+            referenceGroup.append("line")
+                .attr("class", "bmi-reference")
+                .attr("x1", 0)
+                .attr("x2", width)
+                .attr("y1", y(cat.threshold))
+                .attr("y2", y(cat.threshold))
+                .attr("stroke", cat.color)
+                .attr("stroke-width", 1)
+                .attr("stroke-dasharray", "5,5");
+
+            referenceGroup.append("text")
+                .attr("class", "bmi-label")
+                .attr("x", width + 10)
+                .attr("y", y(cat.threshold) + 4) // Slight vertical adjustment
+                .attr("text-anchor", "start")
+                .attr("fill", cat.color)
+                .text(cat.name);
+        });
+
+        svg.append("g")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .attr("transform", "rotate(-45)")
+            .attr("text-anchor", "end")
+            .attr("dx", "-0.5em")
+            .attr("dy", "0.5em");
+
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+        // labels
+        svg.append("text")
+            .attr("class", "axis-label")
+            .attr("text-anchor", "middle")
+            .attr("x", width / 2)
+            .attr("y", height + margin.bottom - 40) // Adjusted downward
+            .text("Transportation Method");
+
+        svg.append("text")
+            .attr("class", "axis-label")
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -height / 2)
+            .attr("y", -margin.left + 15)
+            .text("BMI (kg/m²)");
+    }
+</script>
+</body>
+</html>
