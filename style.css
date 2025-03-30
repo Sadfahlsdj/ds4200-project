@@ -28,3 +28,8 @@
   background-color: #4e49d3;
   transform: translateY(-2px);
 }
+body {
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
