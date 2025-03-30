@@ -1,20 +1,25 @@
-/* Navigation Button */
-.nav-button {
-  display: inline-block;
+/* Navigation Bar */
+.navbar {
   background-color: #6C63FF;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-size: 16px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 2px 4px 8px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   margin-bottom: 30px;
 }
 
-.nav-button:hover {
+.navbar a {
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.3s;
+  border-radius: 20px;
+  margin: 0 10px;
+}
+
+.navbar a:hover {
   background-color: #4e49d3;
-  transform: translateY(-2px);
-  box-shadow: 3px 6px 12px rgba(0,0,0,0.3);
 }
