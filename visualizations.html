@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Obesity Visualizations</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <h1>Obesity & BMI Analysis: Visualizations</h1>
+
+  <p><a href="index.html"><strong>← Back to Introduction</strong></a></p>
+
+  <h2>Visualization 1: Physical Activity vs. Obesity Level</h2>
+  <iframe src="phys_act.html" width="100%" height="500"></iframe>
+  <p><strong>Takeaway:</strong> As obesity levels increase, the frequency of physical activity decreases significantly. Individuals classified under the "Obesity" category exhibit very low levels of weekly physical activity, with many reporting a frequency close to zero. On the other hand, those with normal or insufficient weight show more variation and higher levels of activity.
+</p>
+  <p><strong>Design:</strong> A violin plot was selected to capture the full distribution of physical activity frequency across weight categories. The plot includes an inner box to highlight medians and quartiles, layered within a KDE (kernel density estimate) shape that reveals how responses are concentrated. The color coding reinforces categorical distinctions. This plot is made interactive using Plotly so that the users can hover over each section of the violins to reveal tooltips showing statistical markers such as the median, quartiles, min/max, and density values. The interactivity makes it easy to explore and compare activity trends within and between different weight classes without needing to refer to a static legend or external documentation.
+</p>
+
+  <h2>Visualization 2: Family History Influence</h2>
+  <iframe src="fam_his.html" width="100%" height="500"></iframe>
+  <p><strong>Takeaway:</strong> Individuals with a family history of overweight are far more likely to fall into the Obesity category. In fact, over 99% of the individuals categorized as Obese reported a family history of being overweight. This pattern is also noticeable in the Overweight group, whereas the Normal and Insufficient Weight groups have a more even distribution between those with and without family history. This suggests a strong hereditary or environmental influence within families contributing to weight outcomes.
+</p>
+  <p><strong>Design:</strong> A grouped bar chart was chosen to break down weight categories by presence or absence of family history. Each panel displays a separate weight class, enabling easy side-by-side comparison. The color-coding (red for 'yes', blue for 'no') enhances visual clarity. This visualization is built with Altair and includes interactive tooltips so that the users can hover over each bar to view exact percentages, which allows for detailed, on-demand data exploration while keeping the chart clean and minimalist by default.</p>
+
+  <h2>Visualization 3: Age Influence</h2>
+  <iframe src="age.html" width="100%" height="500"></iframe>
+  <p><strong>Takeaway:</strong> Most individuals with higher BMI values fall in the middle-age range (20–40 years old), and obesity is notably concentrated in this age cluster. The Insufficient and Normal Weight groups are more dispersed and appear across a wider age range. The chart suggests that age, particularly during early adulthood, may be a critical period where weight gain trends solidify.
+</p>
+  <p><strong>Design:</strong> This scatter plot visualizes the relationship between BMI (x-axis) and age (y-axis), with color indicating the simplified weight category. We implemented an interactive dropdown menu using Altair, allowing viewers to filter by specific weight types — helping isolate trends within groups or compare them in aggregate. Hover tooltips also reveal individual data points for more detailed exploration. Scatter plots are ideal for this kind of continuous-continuous variable pairing, making it easy to spot patterns, clustering, and outliers.
+</p>
+
+  <h2>Visualization 4: BMI by Transportation (D3 Boxplot)</h2>
+  <iframe src="d3_image.html" width="100%" height="500"></iframe>
+  <p><strong>Takeaway:</strong> Individuals who primarily use cars or motorcycles exhibit noticeably higher BMI values compared to those who walk or bike. The median BMI for automobile users is well above the overweight threshold. In contrast, people using public transportation or walking tend to fall closer to the normal BMI range. This supports the idea that passive transportation methods may correlate with lower physical activity and, in turn, increased obesity risk.
+</p>
+  <p><strong>Design:</strong> We implemented a custom D3.js boxplot to visualize BMI distribution across five different transportation methods. Each boxplot shows the interquartile range, median, whiskers, and outliers, giving a full picture of the distribution. Horizontal reference lines were added for clinical BMI thresholds (Underweight, Normal, Overweight) to contextualize the data with health guidelines. This interactive visualization adjusts dynamically based on the dataset and enhances the user’s ability to interpret health risk by transportation mode without overwhelming the display.
+</p>
+
+  <h2>Conclusion</h2>
+  <p>Our analysis shows that obesity is influenced by a combination of physical activity, age, family history, and daily lifestyle choices such as transportation methods. We found that individuals with a family history of being overweight are significantly more likely to be obese, that physical inactivity correlates with higher obesity levels, and that passive transportation habits (like using cars or motorcycles) are linked to higher BMI. Middle-aged individuals, especially between 20–40 years old, showed a greater tendency toward obesity, emphasizing the importance of early intervention. One limitation we encountered was the imbalance in binary variables — for example, there were far more non-smokers than smokers in the dataset, making it difficult to draw meaningful comparisons across some categories. Recognizing this helped us focus on more balanced and interpretable variables. Through interactive visualizations, we were able to not only highlight these relationships but also allow viewers to explore patterns in a more personalized and meaningful way. In future work, we hope to explore more nuanced dietary behaviors, track long-term BMI trends, or even build predictive models to identify high-risk individuals. Overall, this project reinforces the importance of everyday lifestyle choices and their measurable impact on health.
+</p>
+
+  <p><a href="index.html"><strong>← Back to Introduction</strong></a></p>
+</body>
+</html>
