@@ -13,33 +13,45 @@
     <h1>Analyzing Obesity: Lifestyle Factors and BMI</h1>
 
     <h2>Introduction</h2>
-    <p>[Write your intro here]</p>
+    <p></p>
 
-    <h2>Dataset Overview</h2>
-    <p>[Describe your dataset: size, source, attributes]</p>
+    <h2>Dataset Overview</h2>Obesity is a pressing public health issue worldwide, and understanding the factors that contribute to obesity can help to devise more diverse health strategies. 
+Our project is aimed towards finding the correlation between eating habits, physical conditions, and obesity levels using a dataset that contains a variety of features related to these aspects. 
+By analyzing the data and creating visualizations, our project aims to gain insight on how different factors impact obesity levels. The findings could be used to inform public health initiatives and individual health practices.
+Identifying the trends and relationships between eating habits, physical condition, and obesity is vital for addressing health issues like diabetes, heart disease, and hypertension, which are often correlated to obesity. 
+Knowing which factors impact obesity the most could inform people who are at risk about how to minimize said risk. 
+
+    <p>The dataset includes 2,111 observations and 17 attributes collected from individuals in Mexico, Peru, and Colombia. It includes both numerical attributes (like weight, 
+height, age, water consumption) and categorical attributes (such as smoking habits, transportation method, family history of obesity). The target variable, <code>NObeyesdad</code>, 
+classifies individuals into different obesity categories. 
+We also derived a BMI variable from height and weight to enhance analysis.</p>
 
     <h2>Visualization 1: Physical Activity vs. Obesity Level</h2>
     <iframe src="phys_act.html" width="100%" height="500"></iframe>
-    <p><strong>Takeaway:</strong> [Your insight here]</p>
-    <p><strong>Design:</strong> [Why you chose this chart]</p>
+   <p><strong>Takeaway:</strong> As obesity levels increase, the frequency of physical activity decreases significantly. People with obesity tend to report lower levels of weekly physical activity.</p>
+<p><strong>Design:</strong> A violin plot was chosen to visualize the distribution and spread of physical activity across different weight categories. The inner box plots emphasize median and quartiles, while the color makes the classes visually distinguishable.</p>
+
 
     <h2>Visualization 2: Family History Influence</h2>
     <iframe src="fam_his.html" width="100%" height="500"></iframe>
-    <p><strong>Takeaway:</strong> [...]</p>
-    <p><strong>Design:</strong> [...]</p>
+   <p><strong>Takeaway:</strong> Individuals with a family history of overweight are far more likely to fall into the obesity category. This trend is especially dominant in the 'Obesity' and 'Overweight' groups.</p>
+<p><strong>Design:</strong> A grouped bar chart with color-coded bars (yes/no) was used to show the distribution within each weight group. This makes the contrast between family history and obesity levels immediately apparent.</p>
 
-    <h2>Visualization 2: Age Influence</h2>
+
+    <h2>Visualization 3: Age Influence</h2>
     <iframe src="age.html" width="100%" height="500"></iframe>
-    <p><strong>Takeaway:</strong> [...]</p>
-    <p><strong>Design:</strong> [...]</p>
+    <p><strong>Takeaway:</strong> Most individuals with higher BMI values fall in the middle-age range (20–40 years old), with obesity more concentrated in that cluster.</p>
+<p><strong>Design:</strong> A scatter plot with color-coded points and a dropdown filter helps isolate trends by weight type. Interactivity helps highlight individual groups or compare them together.</p>
 
     <h2>Visualization 4: BMI by Transportation (D3 Boxplot)</h2>
     <iframe src="d3_image.html" width="100%" height="500"></iframe>
-    <p><strong>Takeaway:</strong> [...]</p>
-    <p><strong>Design:</strong> [...]</p>
+<p><strong>Takeaway:</strong> Individuals using cars or motorcycles tend to have higher BMI values than those walking or using public transportation, suggesting a link between daily activity and weight.</p>
+<p><strong>Design:</strong> We implemented a D3.js boxplot to show BMI distribution for each transportation method. Reference lines for BMI categories were added to help interpret health ranges.</p>
 
     <h2>Conclusion</h2>
-    <p>[Summarize your findings and future work]</p>
+    <p>
+Our analysis confirms several correlations between lifestyle factors and obesity. Physical inactivity, poor eating habits, and family history are strongly linked to higher obesity levels. We also observed that active transport users (like walkers or public transit riders) generally have lower BMI values. In the future, we hope to explore temporal changes or test predictive models to further validate our insights.
+</p>
 
     <script src="your-d3-code.js"></script>
 </body>
