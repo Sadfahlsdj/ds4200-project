@@ -45,18 +45,23 @@ This plot is made interactive using Plotly so that the users can hover over each
 
     <h2>Visualization 3: Age Influence</h2>
     <iframe src="age.html" width="100%" height="500"></iframe>
-    <p><strong>Takeaway:</strong> Most individuals with higher BMI values fall in the middle-age range (20–40 years old), with obesity more concentrated in that cluster.</p>
-<p><strong>Design:</strong> A scatter plot with color-coded points and a dropdown filter helps isolate trends by weight type. Interactivity helps highlight individual groups or compare them together.</p>
+   <p><strong>Takeaway:</strong> Most individuals with higher BMI values fall in the middle-age range (20–40 years old), and obesity is notably concentrated in this age cluster. The Insufficient and Normal Weight groups are more dispersed and appear across a wider age range. The chart suggests that age, particularly during early adulthood, may be a critical period where weight gain trends solidify.</p>
+
+<p><strong>Design:</strong> This scatter plot visualizes the relationship between BMI (x-axis) and age (y-axis), with color indicating the simplified weight category. We implemented an interactive dropdown menu using Altair, allowing viewers to filter by specific weight types — helping isolate trends within groups or compare them in aggregate. Hover tooltips also reveal individual data points for more detailed exploration. Scatter plots are ideal for this kind of continuous-continuous variable pairing, making it easy to spot patterns, clustering, and outliers.</p>
 
     <h2>Visualization 4: BMI by Transportation (D3 Boxplot)</h2>
     <iframe src="d3_image.html" width="100%" height="500"></iframe>
-<p><strong>Takeaway:</strong> Individuals using cars or motorcycles tend to have higher BMI values than those walking or using public transportation, suggesting a link between daily activity and weight.</p>
-<p><strong>Design:</strong> We implemented a D3.js boxplot to show BMI distribution for each transportation method. Reference lines for BMI categories were added to help interpret health ranges.</p>
+<p><strong>Takeaway:</strong> Individuals who primarily use cars or motorcycles exhibit noticeably higher BMI values compared to those who walk or bike. The median BMI for automobile users is well above the overweight threshold. In contrast, people using public transportation or walking tend to fall closer to the normal BMI range. This supports the idea that passive transportation methods may correlate with lower physical activity and, in turn, increased obesity risk.</p>
+
+<p><strong>Design:</strong> We implemented a custom D3.js boxplot to visualize BMI distribution across five different transportation methods. Each boxplot shows the interquartile range, median, whiskers, and outliers, giving a full picture of the distribution. Horizontal reference lines were added for clinical BMI thresholds (Underweight, Normal, Overweight) to contextualize the data with health guidelines. This interactive visualization adjusts dynamically based on the dataset and enhances the user’s ability to interpret health risk by transportation mode without overwhelming the display.</p>
 
     <h2>Conclusion</h2>
-    <p>
-Our analysis confirms several correlations between lifestyle factors and obesity. Physical inactivity, poor eating habits, and family history are strongly linked to higher obesity levels. We also observed that active transport users (like walkers or public transit riders) generally have lower BMI values. In the future, we hope to explore temporal changes or test predictive models to further validate our insights.
+  <p>
+Our analysis shows that obesity is influenced by a combination of physical activity, age, family history, and daily lifestyle choices such as transportation methods. We found that individuals with a family history of overweight are significantly more likely to be obese, that physical inactivity correlates with higher obesity levels, and that passive transportation habits (like using cars or motorcycles) are linked to higher BMI. Middle-aged individuals, especially between 20–40 years old, showed a greater tendency toward obesity, emphasizing the importance of early intervention.
+
+Through interactive visualizations, we were able to not only highlight these relationships but also allow viewers to explore patterns in a more personalized and meaningful way. In future work, we hope to explore more nuanced dietary behaviors, track long-term BMI trends, or even build predictive models to identify high-risk individuals. Overall, this project reinforces the importance of everyday lifestyle choices and their measurable impact on health.
 </p>
+
 
     <script src="your-d3-code.js"></script>
     <h2>References</h2>
