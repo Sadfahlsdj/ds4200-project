@@ -60,12 +60,20 @@
             font-size: 11px;
             pointer-events: none;
         }
+        .center {
+    display: flex;
+    justify-content: center;
+}
+
     </style>
 </head>
 <body>
 <h1>BMI Distribution by Transportation Method</h1>
 <div id="error"></div>
-<div id="chart"></div>
+<div class="center">
+  <div id="chart"></div>
+</div>
+
 
 <script>
     function logError(message) {
