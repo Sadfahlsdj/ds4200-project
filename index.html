@@ -14,51 +14,60 @@
 
 
 
-  <h1>Analyzing Obesity: Lifestyle Factors and BMI</h1>
+ <h1>Analyzing Obesity: Lifestyle Factors and BMI</h1>
 
+<h2>Introduction</h2>
+<p>
+Obesity is a pressing global health concern, associated with chronic diseases like diabetes, cardiovascular disorders, and hypertension. Tackling obesity requires a clear understanding of the various factors that influence it—ranging from biological predispositions to everyday lifestyle choices. Our project explores the correlation between obesity levels and different health-related attributes using interactive visualizations. By identifying key physiological and behavioral patterns within the data, we aim to inform both public health policy and individual decision-making.
+</p>
 
-  <h2>Introduction</h2>
-  <p>Obesity is a pressing public health issue worldwide, linked to chronic conditions such as diabetes, heart disease, and hypertension. Understanding the factors that contribute to obesity is crucial for developing targeted prevention strategies. Our project explores the relationship between various personal characteristics and obesity levels, using a dataset that captures both physiological and behavioral health indicators. Through interactive visualizations, we aim to uncover meaningful patterns and correlations that can inform public health messaging, medical screening practices, and individual decision-making.</p>
+<h2>Dataset Overview</h2>
+<p>
+The dataset contains <strong>2,111 observations</strong> collected from individuals in <strong>Mexico, Peru, and Colombia</strong>. It includes <strong>17 features</strong> related to demographic background, health behaviors, and physical conditions. The data was obtained from a public repository as part of a research study titled 
+<a href="https://archive.ics.uci.edu/dataset/544/estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition" target="_blank">
+<em>Estimation of Obesity Levels Based on Eating Habits and Physical Condition</em></a>.
+</p>
 
-  <h2>Dataset Overview</h2>
-<p>The dataset contains <strong>2,111 observations</strong> and <strong>17 features</strong> collected from individuals in Mexico, Peru, and Colombia. It includes a wide range of physiological and behavioral health indicators.</p>
+<p>
+In our project, we primarily refer to the target variable <code>NObeyesdad</code>, which classifies individuals into categories such as <strong>Insufficient Weight</strong>, <strong>Normal Weight</strong>, <strong>Overweight</strong>, and three levels of <strong>Obesity</strong>. For simplicity, we introduce a shortened version called <code>Short_Weight_Type</code>, grouping them into four broader categories: Insufficient, Normal, Overweight, and Obese.
+</p>
 
-<p><strong>Physiological features include:</strong></p>
+<p>We organize the key features into the following groups:</p>
+
+<p><strong>Physiological Features</strong> — attributes that describe a person’s physical state or biological background:</p>
 <ul>
-  <li>Age</li>
-  <li>Gender</li>
-  <li>Height</li>
-  <li>Weight</li>
-  <li>Family history of overweight (<code>family_history_with_overweight</code>)</li>
+  <li><code>Age</code> – age of the individual</li>
+  <li><code>Gender</code> – male or female</li>
+  <li><code>Height</code> and <code>Weight</code> – used to calculate BMI (Body Mass Index)</li>
+  <li><code>family_history_with_overweight</code> – whether the person has a family history of obesity</li>
 </ul>
 
-<p><strong>Behavioral features include:</strong></p>
+<p><strong>Behavioral Features</strong> — indicators related to diet, activity, and lifestyle choices:</p>
 <ul>
-  <li>Fast food consumption (<code>FAVC</code>)</li>
-  <li>Frequency of vegetable consumption (<code>FCVC</code>)</li>
-  <li>Number of main meals (<code>NCP</code>)</li>
-  <li>Between-meal snacks (<code>CAEC</code>)</li>
-  <li>Water consumption (<code>CH2O</code>)</li>
-  <li>Physical activity (<code>FAF</code>)</li>
-  <li>Time using technology (<code>TUE</code>)</li>
-  <li>Transportation method (<code>MTRANS</code>)</li>
-  <li>Alcohol consumption (<code>CALC</code>)</li>
-  <li>Smoking habits (<code>SMOKE</code>)</li>
+  <li><code>FAVC</code> – frequent consumption of high-calorie food</li>
+  <li><code>FCVC</code> – frequency of vegetable consumption</li>
+  <li><code>NCP</code> – number of main meals per day</li>
+  <li><code>CAEC</code> – frequency of snacking between meals</li>
+  <li><code>CH2O</code> – daily water intake</li>
+  <li><code>FAF</code> – frequency of physical activity</li>
+  <li><code>TUE</code> – time spent using technology (screen time)</li>
+  <li><code>CALC</code> – alcohol consumption</li>
+  <li><code>SMOKE</code> – smoking habits</li>
+  <li><code>MTRANS</code> – primary method of transportation</li>
 </ul>
 
+<h2>References</h2>
+<ul>
+  <li><a href="https://archive.ics.uci.edu/dataset/544/estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition" target="_blank">Estimation of Obesity Levels Based on Eating Habits and Physical Condition (dataset source)</a></li>
+  <li><a href="https://pubmed.ncbi.nlm.nih.gov/15701725/" target="_blank">Genetic and environmental influences on human obesity</a></li>
+</ul>
 
-  <h2>References</h2>
-  <ul>
-    <li><a href="https://archive.ics.uci.edu/dataset/544/estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition" target="_blank">Estimation of obesity levels based on eating habits and physical condition (original dataset paper)</a></li>
-    <li><a href="https://pubmed.ncbi.nlm.nih.gov/15701725/" target="_blank">Genetic and environmental influences on human obesity</a></li>
-  </ul>
-
-  <h2>Contributors</h2>
-  <ul>
-    <li>Kim-Cuong Tran Dang</li>
-    <li>Saisha Ketkar</li>
-    <li>William Sartorio</li>
-  </ul>
+<h2>Contributors</h2>
+<ul>
+  <li>Kim-Cuong Tran Dang</li>
+  <li>Saisha Ketkar</li>
+  <li>William Sartorio</li>
+</ul>
 
   <p><a href="visualizations.html"><strong>→ Go to Visualizations</strong></a></p>
 </body>
