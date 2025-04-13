@@ -61,4 +61,14 @@ h1, h2 {
   max-width: 900px;
   margin: auto;
 }
+ul {
+  list-style-type: disc;
+  margin-left: 30px;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
 
